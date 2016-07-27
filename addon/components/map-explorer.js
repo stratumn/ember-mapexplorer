@@ -48,5 +48,17 @@ export default Ember.Component.extend({
       application: this.get('application'),
       chainscript: this.get('chainscript')
     });
+  },
+
+  didUpdateAttrs() {
+    this._super(...arguments);
+
+    // Temporary solution.
+    const chainscript = this.get('chainscript');
+
+    if (chainscript) {
+      this.get('builder').chainTree.display(chainscript);
+    }
   }
+
 });
