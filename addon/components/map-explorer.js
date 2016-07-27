@@ -11,6 +11,12 @@ export default Ember.Component.extend({
     close() {
       this.set('segment', null);
       d3.selectAll('g.node.selected').classed('selected', false);
+
+      const onSelectSegment = this.get('onSelectSegment');
+
+      if (onSelectSegment) {
+        onSelectSegment(null);
+      }
     },
     show(part) {
       ['state', 'link', 'evidence', 'json'].forEach((part) => this.set(part + 'Showed', false));
@@ -28,6 +34,12 @@ export default Ember.Component.extend({
       onclick: d => {
         this.set('segment', d.data);
         this.set('evidenceComplete', this.get('segment').meta.evidence.state === 'COMPLETE');
+
+        const onSelectSegment = this.get('onSelectSegment');
+
+        if (onSelectSegment) {
+          onSelectSegment(d.data.meta.linkHash);
+        }
       }
     }));
 
