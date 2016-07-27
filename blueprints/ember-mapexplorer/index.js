@@ -8,11 +8,9 @@ module.exports = {
   },
 
   afterInstall: function() {
-    return this.addBowerPackageToProject({ name: 'mapexplorer-core', target: 'alpha' })
+    return this.addBowerPackageToProject('mapexplorer-core', 'alpha')
       .then(function () {
-        return _this.addPackagesToProject(
-          { name: 'ember-cli-sass', target: 'latest' }
-        );
-      });
+        return this.addPackageToProject('ember-cli-sass', 'latest');
+      }.bind(this));
   }
 };
