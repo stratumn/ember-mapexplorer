@@ -38,7 +38,7 @@ export default Ember.Component.extend({
         const onSelectSegment = this.get('onSelectSegment');
 
         if (onSelectSegment) {
-          onSelectSegment(d.data.meta.linkHash);
+          onSelectSegment(this.get('segment'));
         }
       }
     }));
