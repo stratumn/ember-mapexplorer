@@ -10,10 +10,9 @@ export default Ember.Component.extend({
   actions: {
     close() {
       this.set('segment', null);
-      d3.selectAll('g.node.selected').classed('selected', false);
+      this.onHide();
 
       const onSelectSegment = this.get('onSelectSegment');
-
       if (onSelectSegment) {
         onSelectSegment(null);
       }
@@ -30,8 +29,9 @@ export default Ember.Component.extend({
   },
 
   didInsertElement() {
-    this.set('builder', new MapexplorerCore.ChainMapBuilder(this.$(), {
-      onclick: d => {
+    this.set('builder', new MapexplorerCore.ChainTreeBuilder(this.$(), {
+      onclick: (d, onHide) => {
+        this.onHide = onHide;
         this.set('segment', d.data);
         this.set('evidenceComplete', this.get('segment').meta.evidence.state === 'COMPLETE');
 
