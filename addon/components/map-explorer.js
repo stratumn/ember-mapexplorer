@@ -15,7 +15,7 @@ export default Ember.Component.extend({
       }
     },
     show(part) {
-      ['state', 'link', 'evidence', 'json'].forEach((part) => this.set(part + 'Showed', false));
+      ['state', 'link', 'evidence', 'json'].forEach(part => this.set(part + 'Showed', false));
       this.set(part + 'Showed', true);
     }
   },
@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       id: this.get('mapId'),
       application: this.get('application'),
       chainscript: this.get('chainscript')
-    }, {
+    }, Object.assign({}, {
       onclick: (d, onHide) => {
         this.onHide = onHide;
         this.set('segment', d.data);
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
           onSelectSegment(this.get('segment'));
         }
       },
-      onTag: (tag) => {}
-    });
+      onTag: () => {}
+    }, this.get('options')));
   }
 });
