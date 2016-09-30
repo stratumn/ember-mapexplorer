@@ -33,14 +33,14 @@ export default Ember.Component.extend({
       application: this.get('application'),
       chainscript: this.get('chainscript')
     }, Object.assign({}, {
-      onclick: (d, onHide) => {
+      onclick: (d, onHide, element) => {
         this.onHide = onHide;
         this.set('segment', d.data);
         this.set('evidenceComplete', this.get('segment').meta.evidence.state === 'COMPLETE');
 
         const onSelectSegment = this.get('onSelectSegment');
         if (onSelectSegment) {
-          onSelectSegment(this.get('segment'));
+          onSelectSegment(this.get('segment'), element);
         }
       },
       onTag: () => {}
